@@ -1,0 +1,43 @@
+[package]
+name = "rust-ai-inference-engine"
+version = "0.1.0"
+edition = "2021"
+description = "高性能 AI 推理引擎，支持 Transformer 模型和 ONNX 格式"
+license = "MIT"
+
+[dependencies]
+# 序列化
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# 科学计算
+ndarray = "0.16"
+num-traits = "0.2"
+
+# 并行计算
+rayon = "1.10"
+num_cpus = "1"
+
+# HTTP API
+axum = "0.7"
+tokio = { version = "1", features = ["full"] }
+tower-http = { version = "0.6", features = ["cors", "trace"] }
+
+# 错误处理
+anyhow = "1"
+thiserror = "2"
+
+# 日志
+log = "0.4"
+env_logger = "0.11"
+
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+tempfile = "3"
+
+[[bench]]
+name = "inference_bench"
+harness = false
