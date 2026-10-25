@@ -1,31 +1,31 @@
-# Rust 编译产物
-/target/
-**/*.rs.bk
-
-# Cargo.lock（库项目不提交 lock 文件）
-Cargo.lock
-
-# IDE 配置文件
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-
-# 操作系统文件
-.DS_Store
-Thumbs.db
-
-# 环境变量文件
-.env
-.env.*
-
-# 构建产物
-*.d
-*.rlib
+# CMake and native build products
+/build*/
+/out/
+/.cache/
+CMakeUserPresets.json
+*.obj
+*.o
+*.a
+*.lib
 *.dll
 *.so
 *.dylib
+*.exe
+*.pdb
+*.ilk
+*.exp
 
-# 基准测试报告
-target/criterion/
+# Editors, operating systems, and local credentials
+/.vs/
+/.vscode/
+/.idea/
+.DS_Store
+Thumbs.db
+.env
+.env.*
+__pycache__/
+*.pyc
+
+# Local outputs from the previous implementation
+/target/
+/Cargo.lock

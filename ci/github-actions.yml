@@ -1,0 +1,48 @@
+name: C++ build and test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        server: ['ON', 'OFF']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DOCTOPUS_BUILD_SERVER=${{ matrix.server }}
+      - name: Build
+        run: cmake --build build --config Release --parallel 2
+      - name: Test
+        run: ctest --test-dir build -C Release --output-on-failure
+      - name: Install reference runtime
+        if: matrix.os == 'ubuntu-latest' && matrix.server == 'ON'
+        run: python -m pip install numpy==2.2.6 onnx==1.18.0 onnxruntime==1.22.0
+      - name: Compare with ONNX Runtime
+        if: matrix.os == 'ubuntu-latest' && matrix.server == 'ON'
+        run: python tests/test_onnx_reference.py ./build/octopus
+  sanitizers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Configure sanitizers
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DOCTOPUS_ENABLE_SANITIZERS=ON -DOCTOPUS_BUILD_SERVER=OFF
+      - name: Build
+        run: cmake --build build --parallel 2
+      - name: Test
+        run: ctest --test-dir build --output-on-failure

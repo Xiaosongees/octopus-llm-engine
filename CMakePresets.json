@@ -1,0 +1,14 @@
+{
+  "version": 5,
+  "cmakeMinimumRequired": {"major": 3, "minor": 24, "patch": 0},
+  "configurePresets": [
+    {
+      "name": "release",
+      "displayName": "Release build",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {"CMAKE_BUILD_TYPE": "Release"}
+    }
+  ],
+  "buildPresets": [{"name": "release", "configurePreset": "release", "configuration": "Release"}],
+  "testPresets": [{"name": "release", "configurePreset": "release", "configuration": "Release", "output": {"outputOnFailure": true}}]
+}

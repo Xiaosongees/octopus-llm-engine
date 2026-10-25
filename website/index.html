@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Octopus is an experimental C++20 CPU inference engine with tensors, computation graphs, Transformers, and an HTTP API.">
+  <title>Octopus LLM Engine</title>
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,sans-serif;background:#0c1424;color:#e7eefc}
+    body{max-width:1020px;margin:auto;padding:40px 24px;line-height:1.65}a{color:#72dfc3;text-underline-offset:4px}
+    nav{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.badge{color:#72dfc3;font-size:.85rem;letter-spacing:.09em}
+    header{padding:80px 0 40px}h1{font-size:clamp(2.5rem,7vw,5rem);line-height:1.1;letter-spacing:-.04em;margin:18px 0}
+    h2{margin-top:48px}p{max-width:750px;color:#b9c8e0}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+    article{padding:24px;border:1px solid #2c3b55;border-radius:12px;background:#121e32}article h3{margin-top:0}
+    pre{padding:22px;background:#121e32;border:1px solid #2c3b55;border-radius:12px;overflow:auto}code{font-family:ui-monospace,monospace}
+    .button{display:inline-block;padding:12px 20px;border-radius:8px;background:#72dfc3;color:#10201d;font-weight:650;text-decoration:none}
+    footer{margin-top:70px;border-top:1px solid #2c3b55;padding-top:24px;color:#b9c8e0}:focus-visible{outline:3px solid #f6cb73;outline-offset:5px}
+  </style>
+</head>
+<body>
+  <nav aria-label="Main navigation"><strong>OCTOPUS</strong><a href="https://github.com/Xiaosongees/octopus-llm-engine">Source and documentation</a></nav>
+  <header>
+    <span class="badge">C++20 · CPU INFERENCE · EXPERIMENTAL</span>
+    <h1>Understand the engine.<br>Own the computation.</h1>
+    <p>An open-source inference runtime built around readable tensor kernels, validated computation graphs, and real Transformer operations.</p>
+    <a class="button" href="https://github.com/Xiaosongees/octopus-llm-engine#build">Build the engine</a>
+  </header>
+  <main>
+    <section aria-labelledby="features"><h2 id="features">A complete path from weights to results</h2>
+      <div class="cards">
+        <article><h3>Numerical foundations</h3><p>Broadcasting, batched matrix multiplication, normalization, convolution, embeddings, and masked attention.</p></article>
+        <article><h3>Validated execution</h3><p>Explicit parameters, dependency checks, independent request state, and per-operator execution statistics.</p></article>
+        <article><h3>Practical interfaces</h3><p>A C++ library, command-line tools, local HTTP API, native JSON models, and a documented ONNX subset.</p></article>
+      </div>
+    </section>
+    <section aria-labelledby="start"><h2 id="start">Build, test, and run</h2><pre><code>cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --config Release --parallel
+ctest --test-dir build -C Release --output-on-failure
+./build/octopus demo</code></pre><p>With Visual Studio, use <code>build/Release/octopus.exe</code>. The sample model returns the verified output <code>[1.5, 1.5, 8.0]</code>.</p></section>
+    <section aria-labelledby="scope"><h2 id="scope">Clear capabilities, measurable progress</h2><p>Octopus currently runs on the CPU. CUDA, quantization, KV caching, and pretrained text generation are not implemented. Benchmarks measure actual execution and make no unsupported speedup claims.</p><p><a href="https://github.com/Xiaosongees/octopus-llm-engine/blob/main/docs/model-formats.md">Read model support details</a></p></section>
+  </main>
+  <footer>Octopus LLM Engine · MIT License · Documentation and diagnostics in English</footer>
+</body>
+</html>
